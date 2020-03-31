@@ -21,7 +21,11 @@ int main() {
 		if(arr[i]%2==0)
 			check=1;
 	}
-  
+  	for(i=0; i<n; i++)
+	{
+		if(arr[i]!=arr[n-1-i])
+			check=1;
+	}
   
   
   
