@@ -7,26 +7,25 @@
 int main() {
   system("cls");
   //INPUT - @STUDENT:ADD YOUR CODE FOR INPUT HERE:
-	int n,j,address,i=0;
+	int n,j,i=0;
 	int arr[20];
 	int sum = 0;
 	scanf("%d",&n);
+
 	while(n!=0)
 	{
 		arr[i] = n%10;
 		i++;
 		n/=10;
 	}
-	for(j=0; j<i-1; j++)
+	for(j=i; j>=0; j--)
 	{
-		if(arr[i]%2!=0)
+		if(j%2!=0)
 		{
-			address = i;
-			break;
+			sum+=arr[j-1];
 		}
 	}
-	sum=arr[address-1]+arr[address+1];
-  
+
   
   
   
@@ -35,10 +34,7 @@ int main() {
   printf("\nOUTPUT:\n");
   //@STUDENT: WRITE YOUR OUTPUT HERE:
 
-printf("%d",sum);
-
-
-
+	printf("%d",sum);
 
 
 
