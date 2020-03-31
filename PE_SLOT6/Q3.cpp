@@ -16,7 +16,7 @@ void display(int arr[], int n)
 	int i;
 	for(i=0; i<n; i++)
 	{
-		printf("%-2d",arr[i]);
+		printf("%d ",arr[i]);
 	}
 }
 int main() {
