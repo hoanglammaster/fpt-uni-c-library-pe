@@ -29,9 +29,7 @@ int main() {
 	scanf("%d",&b);
   
   
-  
-  
-  
+
   
   // Fixed Do not edit anything here.
   printf("\nOUTPUT:\n");
@@ -46,11 +44,6 @@ for(i=a; i<=b;i++)
 	  }
 
 
-
-
-
-
-  
   
   //--FIXED PART - DO NOT EDIT ANY THINGS HERE
   printf("\n");
