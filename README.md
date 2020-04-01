@@ -1,4 +1,4 @@
-# lib_c
+# my_lib_c
  Library C Language
 From: Hoang Van Lam
 @contact: hoanglammaster@gmail.com
