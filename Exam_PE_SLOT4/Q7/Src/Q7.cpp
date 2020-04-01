@@ -13,18 +13,7 @@ int main() {
 	
 	fflush(stdin);
 	scanf("%s",str);
-	n=strlen(str);
-	for(j=0; j<n-1; j++ )
-	for(i=0; i<n-1; i++ )
-	{
-		max= MAX(str[i],str[i+1]);
-		if(max==str[i]){
-			str[i]=str[i+1];
-			str[i+1]=max;
-		}		
-	}
-  
-  
+	strrev(str);  
   
   
   

@@ -41,7 +41,7 @@ for(i=a; i<=b;i++)
   	{
   		if(prime(i)!=0)
 		  {
-		  	printf("%-2d",i);
+		  	printf("%d ",i);
 			  }	
 	  }
 
