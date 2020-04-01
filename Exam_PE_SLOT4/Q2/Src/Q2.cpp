@@ -38,11 +38,10 @@ int main() {
 for(i=a; i<=b;i++)
   	{
   		if(prime(i)!=0)
-		  {
-		  	printf("%d ",i);
-			  }	
-	  }
-
+		{
+			printf("%d ",i);
+		}	
+	}
 
   
   //--FIXED PART - DO NOT EDIT ANY THINGS HERE
