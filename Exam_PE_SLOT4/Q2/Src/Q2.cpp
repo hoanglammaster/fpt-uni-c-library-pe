@@ -28,7 +28,6 @@ int main() {
 	scanf("%d",&a);
 	scanf("%d",&b);
   
-  
 
   
   // Fixed Do not edit anything here.
