@@ -1,0 +1,176 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <error.h>
+#include <string.h>
+
+#define TRUE 1
+#define FALSE 0
+#define VALID 1
+#define NOT_VALID 0
+#define MAX_SIZE 100
+#define FOLDER "./Data/"
+
+
+//main screen
+
+void mainScreen() {
+    printf("1)\tRead file\n");
+    printf("2)\tCopy file\n");
+    printf("3)\tMerge two file\n");
+    printf("4)\tList file in dictionary\n");
+    printf("5)\tDelete file\n");
+}
+
+//get choice
+
+int getChoice() {
+    int choose, check, status;
+    char space;
+    do {
+        printf("\nChoice features: ");
+        __fpurge(stdin);
+        check = scanf("%d%c", &choose, &space);
+        if (check == 2 && choose < 6 && choose > 0 && space == '\n') {
+            status = VALID;
+        } else {
+            status = NOT_VALID;
+        }
+    } while (status == NOT_VALID);
+    return choose;
+}
+
+
+//read file
+
+void readFile() {
+    char * fileName = (char*) malloc(MAX_SIZE);
+    char * buffer = (char*) malloc(MAX_SIZE);
+    char ch;
+    printf("Enter the name of file you wish to see: ");
+    gets(buffer);
+    strcpy(fileName, FOLDER);
+    strcat(fileName, buffer);
+    FILE * filePtr;
+    filePtr = fopen(fileName, "r");
+    if (filePtr == NULL) {
+        printf("Your file not exist\n");
+    } else {
+        printf("\n");
+        while ((ch = fgetc(filePtr)) != EOF)
+            printf("%c", ch);
+    }
+    printf("\n");
+    free(buffer);
+    free(fileName);
+    fclose(filePtr);
+}
+
+//copy file
+
+void copyFile() {
+    char * srcFile = (char*) malloc(MAX_SIZE);
+    char * targetFile = (char*) malloc(MAX_SIZE);
+    char * buffer = (char*) malloc(MAX_SIZE);
+    char ch;
+    printf("Enter name of file to copy: ");
+    __fpurge(stdin);
+    gets(buffer);
+    strcpy(srcFile, FOLDER);
+    strcat(srcFile, buffer);
+    printf("Enter name of target file: ");
+    __fpurge(stdin);
+    gets(buffer);
+    strcpy(targetFile, FOLDER);
+    strcat(targetFile, buffer);
+    FILE * srcPtr = fopen(srcFile, "r");
+    FILE * targetPtr = fopen(targetFile, "w");
+
+    if (srcPtr == NULL) {
+        printf("Can not open %s file\n", srcFile);
+        remove(targetFile);
+    } else if (targetPtr == NULL) {
+        printf("Can not open %s file\n", targetFile);
+    } else {
+        while ((ch = fgetc(srcPtr)) != EOF)
+            fprintf(targetPtr, "%c", ch);
+
+        printf("File copied successfully!\n");
+    }
+    fclose(srcPtr);
+    fclose(targetPtr);
+    free(buffer);
+    free(targetFile);
+    free(srcFile);
+}
+
+void mergeFile() {
+    //allocate memory
+    char * file1 = (char*) malloc(MAX_SIZE);
+    char * file2 = (char*) malloc(MAX_SIZE);
+    char * file3 = (char*) malloc(MAX_SIZE);
+    char * buffer = (char*) malloc(MAX_SIZE);
+    char ch;
+
+    FILE *fs1, *fs2, *ft;
+    printf("Enter name of first file ");
+    __fpurge(stdin);
+    gets(buffer);
+    strcpy(file1, FOLDER);
+    strcat(file1, buffer);
+    printf("Enter name of second file ");
+    __fpurge(stdin);
+    gets(buffer);
+    strcpy(file2, FOLDER);
+    strcat(file2, buffer);
+    printf("Enter name of file which will store contents of two files ");
+    __fpurge(stdin);
+    gets(buffer);
+    strcpy(file3, FOLDER);
+    strcat(file3, buffer);
+    printf("%s \n%s \n%s\n", file1, file2, file3);
+    fs1 = fopen(file1, "r");
+    fs2 = fopen(file2, "r");
+    if (fs1 == NULL || fs2 == NULL) {
+        perror("Error ");
+        printf("Press any key to exit...\n");
+
+        exit(EXIT_FAILURE);
+    }
+    ft = fopen(file3, "w");
+    if (ft == NULL) {
+        perror("Error ");
+        printf("Press any key to exit...\n");
+        exit(EXIT_FAILURE);
+    }
+    while ((ch = fgetc(fs1)) != EOF)
+        fputc(ch, ft);
+    while ((ch = fgetc(fs2)) != EOF)
+        fputc(ch, ft);
+    printf("Two files were merged into %s file successfully.\n", file3);
+    fclose(fs1);
+    fclose(fs2);
+    fclose(ft);
+    free(file1);
+    free(file2);
+    free(file3);
+}
+
+int main() {
+    mainScreen();
+    int choose;
+    while (1) {
+        choose = getChoice();
+        switch (choose) {
+            case 1: readFile();
+                break;
+            case 2: copyFile();
+                break;
+            case 3: mergeFile();
+                break;
+            case 4: exit(0);
+                break;
+        }
+
+    }
+}
